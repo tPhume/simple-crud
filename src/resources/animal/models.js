@@ -18,12 +18,19 @@ const animalSchema = new mongoose.Schema({
       "mammals",
     ],
   },
-  species: String,
+  species: {
+    type: String,
+    required: true,
+    lowercase: true,
+  },
   age: {
     type: Number,
+    required: true,
     min: 0,
     validate: Number.isInteger,
   },
 });
 
-export default animalSchema;
+const Animal = mongoose.model("Animal", animalSchema);
+
+export default Animal;
