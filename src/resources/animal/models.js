@@ -27,7 +27,10 @@ const animalSchema = new mongoose.Schema({
     type: Number,
     required: true,
     min: 0,
-    validate: Number.isInteger,
+    validate: {
+      validator: Number.isInteger,
+      message: "Age should be an integer only",
+    },
   },
 });
 
