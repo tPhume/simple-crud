@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import animalRouter from "./resources/animal/router";
 
 mongoose
-  .connect("mongodb://user:password@127.0.0.1:27017", {
+  .connect("mongodb://user:password@127.0.0.1:27017/simple-crud", {
     useNewUrlParser: true,
     authSource: "admin",
   })
