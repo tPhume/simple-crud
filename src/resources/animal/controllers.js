@@ -37,4 +37,35 @@ async function getAnimal(req, res) {
   }
 }
 
-export { createAnimal, getAnimal };
+async function upadateAnimal(req, res) {
+  const { name } = req.params;
+  const { group, species, age } = req.body;
+
+  try {
+    const r = await Animal.replaceOne({ name }, { name, group, species, age });
+    if (r.nModified === 0) {
+      res.status(404).json({ message: `animal with name: ${name} not found` });
+    } else {
+      res.status(200).json({ message: "animal updated" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: `not your fault`, error: err });
+  }
+}
+
+async function deleteAnimal(req, res) {
+  const { name } = req.params;
+
+  try {
+    const r = await Animal.deleteOne({ name });
+    if (r.deletedCount === 0) {
+      res.status(404).json({ message: `animal with name: ${name} not found` });
+    } else {
+      res.status(200).json({ message: "animal deleted" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: `not your fault`, error: err });
+  }
+}
+
+export { createAnimal, getAnimal, upadateAnimal, deleteAnimal };
